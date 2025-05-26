@@ -11,14 +11,21 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as HomeImport } from './routes/Home'
+import { Route as FavoritesImport } from './routes/favorites'
+import { Route as AddImport } from './routes/add'
 import { Route as IndexImport } from './routes/index'
 
 // Create/Update Routes
 
-const HomeRoute = HomeImport.update({
-  id: '/Home',
-  path: '/Home',
+const FavoritesRoute = FavoritesImport.update({
+  id: '/favorites',
+  path: '/favorites',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AddRoute = AddImport.update({
+  id: '/add',
+  path: '/add',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -39,11 +46,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
-    '/Home': {
-      id: '/Home'
-      path: '/Home'
-      fullPath: '/Home'
-      preLoaderRoute: typeof HomeImport
+    '/add': {
+      id: '/add'
+      path: '/add'
+      fullPath: '/add'
+      preLoaderRoute: typeof AddImport
+      parentRoute: typeof rootRoute
+    }
+    '/favorites': {
+      id: '/favorites'
+      path: '/favorites'
+      fullPath: '/favorites'
+      preLoaderRoute: typeof FavoritesImport
       parentRoute: typeof rootRoute
     }
   }
@@ -53,37 +67,42 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/Home': typeof HomeRoute
+  '/add': typeof AddRoute
+  '/favorites': typeof FavoritesRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/Home': typeof HomeRoute
+  '/add': typeof AddRoute
+  '/favorites': typeof FavoritesRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
-  '/Home': typeof HomeRoute
+  '/add': typeof AddRoute
+  '/favorites': typeof FavoritesRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/Home'
+  fullPaths: '/' | '/add' | '/favorites'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/Home'
-  id: '__root__' | '/' | '/Home'
+  to: '/' | '/add' | '/favorites'
+  id: '__root__' | '/' | '/add' | '/favorites'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  HomeRoute: typeof HomeRoute
+  AddRoute: typeof AddRoute
+  FavoritesRoute: typeof FavoritesRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  HomeRoute: HomeRoute,
+  AddRoute: AddRoute,
+  FavoritesRoute: FavoritesRoute,
 }
 
 export const routeTree = rootRoute
@@ -97,14 +116,18 @@ export const routeTree = rootRoute
       "filePath": "__root.jsx",
       "children": [
         "/",
-        "/Home"
+        "/add",
+        "/favorites"
       ]
     },
     "/": {
       "filePath": "index.jsx"
     },
-    "/Home": {
-      "filePath": "Home.jsx"
+    "/add": {
+      "filePath": "add.jsx"
+    },
+    "/favorites": {
+      "filePath": "favorites.jsx"
     }
   }
 }
