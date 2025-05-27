@@ -1,6 +1,3 @@
-//add to fav
-//--and jab recipedetails dikhenge tab fav ka button nhi dikhana hai ( matlb check krna padgea curr id find krna hai in fav array agar ha toh return true otherwise false) kuch tag add krte hai and but remove from fav ka button dikhana hai
-import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
 const recipeStore = create(
