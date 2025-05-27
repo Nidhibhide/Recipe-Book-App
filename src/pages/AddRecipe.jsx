@@ -1,51 +1,67 @@
+import recipeStore from "../store/recipeStore";
+import { useNavigate } from "@tanstack/react-router";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
 
-import { useNavigate } from '@tanstack/react-router';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-import * as Yup from 'yup';
-
- function AddRecipe() {
-
+function AddRecipe() {
   const navigate = useNavigate();
-
+  const addRecipe = recipeStore((state) => state.addToStore);
   // Validation Schema
   const validationSchema = Yup.object({
-    title: Yup.string().required('Title is required'),
-    ingredients: Yup.string().required('Ingredients are required'),
-    instructions: Yup.string().required('Instructions are required'),
-    category: Yup.string().required('Category is required'),
+    title: Yup.string().required("Title is required"),
+    ingredients: Yup.string().required("Ingredients are required"),
+    instructions: Yup.string().required("Instructions are required"),
+    category: Yup.string().required("Category is required"),
   });
 
   // Submit handler
   const handleSubmit = (values) => {
-    // addRecipe(values);
-    // navigate({ to: '/' });
+    const id = Math.floor(10 + Math.random() * 90);
+    values.id = id;
+    addRecipe(values);
+    navigate({ to: "/" });
   };
 
   return (
     <div className="max-w-xl mx-auto p-6 mt-8 bg-white rounded-lg shadow">
-      <h2 className="text-2xl font-bold mb-4 text-center text-blue-800">Add a New Recipe</h2>
+      <h2 className="text-2xl font-bold mb-4 text-center text-blue-800">
+        Add a New Recipe
+      </h2>
 
       <Formik
-        initialValues={{ title: '', ingredients: '', instructions: '', category: '' }}
+        initialValues={{
+          title: "",
+          ingredients: "",
+          instructions: "",
+          category: "",
+        }}
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
       >
         <Form className="space-y-5">
           {/* Title */}
           <div>
-            <label className="block text-sm font-medium text-gray-700">Title</label>
+            <label className="block text-sm font-medium text-gray-700">
+              Title
+            </label>
             <Field
               name="title"
               type="text"
               placeholder="Enter recipe title"
               className="w-full mt-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
             />
-            <ErrorMessage name="title" component="div" className="text-red-500 text-sm mt-1" />
+            <ErrorMessage
+              name="title"
+              component="div"
+              className="text-red-500 text-sm mt-1"
+            />
           </div>
 
           {/* Ingredients */}
           <div>
-            <label className="block text-sm font-medium text-gray-700">Ingredients</label>
+            <label className="block text-sm font-medium text-gray-700">
+              Ingredients
+            </label>
             <Field
               name="ingredients"
               as="textarea"
@@ -53,12 +69,18 @@ import * as Yup from 'yup';
               placeholder="List ingredients (e.g., flour, sugar...)"
               className="w-full mt-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
             />
-            <ErrorMessage name="ingredients" component="div" className="text-red-500 text-sm mt-1" />
+            <ErrorMessage
+              name="ingredients"
+              component="div"
+              className="text-red-500 text-sm mt-1"
+            />
           </div>
 
           {/* Instructions */}
           <div>
-            <label className="block text-sm font-medium text-gray-700">Instructions</label>
+            <label className="block text-sm font-medium text-gray-700">
+              Instructions
+            </label>
             <Field
               name="instructions"
               as="textarea"
@@ -66,12 +88,18 @@ import * as Yup from 'yup';
               placeholder="Step-by-step cooking instructions"
               className="w-full mt-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
             />
-            <ErrorMessage name="instructions" component="div" className="text-red-500 text-sm mt-1" />
+            <ErrorMessage
+              name="instructions"
+              component="div"
+              className="text-red-500 text-sm mt-1"
+            />
           </div>
 
           {/* Category */}
           <div>
-            <label className="block text-sm font-medium text-gray-700">Category</label>
+            <label className="block text-sm font-medium text-gray-700">
+              Category
+            </label>
             <Field
               name="category"
               as="select"
@@ -83,7 +111,11 @@ import * as Yup from 'yup';
               <option value="Dinner">Dinner</option>
               <option value="Dessert">Dessert</option>
             </Field>
-            <ErrorMessage name="category" component="div" className="text-red-500 text-sm mt-1" />
+            <ErrorMessage
+              name="category"
+              component="div"
+              className="text-red-500 text-sm mt-1"
+            />
           </div>
 
           {/* Submit Button */}
@@ -99,4 +131,4 @@ import * as Yup from 'yup';
   );
 }
 
-export default AddRecipe
+export default AddRecipe;

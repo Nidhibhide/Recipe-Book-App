@@ -14,6 +14,7 @@ import { Route as rootRoute } from './routes/__root'
 import { Route as FavoritesImport } from './routes/favorites'
 import { Route as AddImport } from './routes/add'
 import { Route as IndexImport } from './routes/index'
+import { Route as RecipeIdImport } from './routes/recipe.$id'
 
 // Create/Update Routes
 
@@ -32,6 +33,12 @@ const AddRoute = AddImport.update({
 const IndexRoute = IndexImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const RecipeIdRoute = RecipeIdImport.update({
+  id: '/recipe/$id',
+  path: '/recipe/$id',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -60,6 +67,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FavoritesImport
       parentRoute: typeof rootRoute
     }
+    '/recipe/$id': {
+      id: '/recipe/$id'
+      path: '/recipe/$id'
+      fullPath: '/recipe/$id'
+      preLoaderRoute: typeof RecipeIdImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -69,12 +83,14 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/add': typeof AddRoute
   '/favorites': typeof FavoritesRoute
+  '/recipe/$id': typeof RecipeIdRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/add': typeof AddRoute
   '/favorites': typeof FavoritesRoute
+  '/recipe/$id': typeof RecipeIdRoute
 }
 
 export interface FileRoutesById {
@@ -82,14 +98,15 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/add': typeof AddRoute
   '/favorites': typeof FavoritesRoute
+  '/recipe/$id': typeof RecipeIdRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/add' | '/favorites'
+  fullPaths: '/' | '/add' | '/favorites' | '/recipe/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/add' | '/favorites'
-  id: '__root__' | '/' | '/add' | '/favorites'
+  to: '/' | '/add' | '/favorites' | '/recipe/$id'
+  id: '__root__' | '/' | '/add' | '/favorites' | '/recipe/$id'
   fileRoutesById: FileRoutesById
 }
 
@@ -97,12 +114,14 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AddRoute: typeof AddRoute
   FavoritesRoute: typeof FavoritesRoute
+  RecipeIdRoute: typeof RecipeIdRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AddRoute: AddRoute,
   FavoritesRoute: FavoritesRoute,
+  RecipeIdRoute: RecipeIdRoute,
 }
 
 export const routeTree = rootRoute
@@ -117,7 +136,8 @@ export const routeTree = rootRoute
       "children": [
         "/",
         "/add",
-        "/favorites"
+        "/favorites",
+        "/recipe/$id"
       ]
     },
     "/": {
@@ -128,6 +148,9 @@ export const routeTree = rootRoute
     },
     "/favorites": {
       "filePath": "favorites.jsx"
+    },
+    "/recipe/$id": {
+      "filePath": "recipe.$id.jsx"
     }
   }
 }
