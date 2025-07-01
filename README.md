@@ -1,13 +1,13 @@
 
 
-# 🍽️ Recipe Book 
+#  Recipe Book 
 
 **Recipe Book** is a modern, lightweight web application built with **React.js**, designed to let users effortlessly **add**, **remove**, and **favorite recipes**. Powered by **Zustand** for state management, styled with **Tailwind CSS**, and navigated using **TanStack Router**, it offers a fast, responsive, and clean cooking experience.
 
-🌐 **Live Demo**:
+ **Live Demo**:
 [https://recipe-book-app-three-peach.vercel.app/](https://recipe-book-app-three-peach.vercel.app/) <!-- Replace with your actual link -->
 
-## 🔧 Tech Stack
+##  Tech Stack
 
 * **Frontend**: React.js, Tailwind CSS
 * **State Management**: Zustand
@@ -15,21 +15,21 @@
 * **Persistence**: localStorage
   
 
-## ✨ Features
+##  Features
 
-### 🍴 Recipe Management
+###  Recipe Management
 
 * Add new recipes with ease
 * Remove recipes from the list
 * Save favorite recipes for quick access
 
-### 💾 State & Storage
+###  State & Storage
 
 * Global state handled via Zustand
 * Data persists in localStorage (favorites and recipe list)
 
 
-## 🚀 Getting Started
+##  Getting Started
 
 ### Prerequisites
 
